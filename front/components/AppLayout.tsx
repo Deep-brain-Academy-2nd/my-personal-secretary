@@ -9,6 +9,9 @@ import { loginFetcher } from "fetcher/user";
 import axios from "axios";
 import { LogInFormRequestType } from "types/user";
 import { dbUrl } from "constant/api";
+import { useSWRConfig } from "swr";
+import { EVENT_FORM_LOCAL_STATE } from "fetcher/secretary";
+import { SECRETARY_LOCAL_STATE } from "types/secretary";
 
 interface AppLayoutPropsType {
   children: ReactNode;
@@ -18,11 +21,15 @@ interface AppLayoutPropsType {
 
 const AppLayout = ({ children }: AppLayoutPropsType): ReactElement => {
   // 로그인이 유무에 따라 다른 레이아웃을 보여주기 위함
-  const { data: user, mutate } = useSWR(`${dbUrl}/user/login`, loginFetcher);
+  const { data: user } = useSWR(`${dbUrl}/user/login`, loginFetcher);
+
+  const { mutate } = useSWRConfig();
 
   // 로그아웃 함수, 로컬데이터를 없앰
   const onLogOut = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    mutate(null);
+    mutate(`${dbUrl}/user/login`, null, false);
+    mutate(EVENT_FORM_LOCAL_STATE, null, false);
+    mutate(SECRETARY_LOCAL_STATE, null, false);
   }, []);
 
   // 로그인 폼 제출하는 함수

@@ -9,6 +9,8 @@ import "moment/locale/ko";
 import { Global, css } from "@emotion/react";
 import { SWRConfig } from "swr";
 import { dbUrl } from "constant/api";
+import { EVENT_FORM_LOCAL_STATE } from "fetcher/secretary";
+import { SECRETARY_LOCAL_STATE } from "types/secretary";
 
 // 공통으로 필요한 것들을 정의
 
@@ -41,8 +43,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           onError: (error, key) => {
             if (
               key === `${dbUrl}/user/login` ||
-              "EventFormLocalState" ||
-              "SecretaryLocalData"
+              EVENT_FORM_LOCAL_STATE ||
+              SECRETARY_LOCAL_STATE
               // 로컬상태나 로그인 상태의 경우 에러를 반환하지 않음
             )
               return;

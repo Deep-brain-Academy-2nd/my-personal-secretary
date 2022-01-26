@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import useSWR from "swr";
 import { EventType } from "types/event";
 import { UserType } from "types/user";
+import { SECRETARY_LOCAL_STATE } from "types/secretary";
 
 const SecretaryPage: NextPage = () => {
   // 유저정보와 토큰을 저장
@@ -37,7 +38,7 @@ const SecretaryPage: NextPage = () => {
   // videoKey: null, // 비디오의 key(서버로 findProject 할 때 사용)
 
   const { data: localData, mutate: localMutate } = useSWR(
-    user ? "SecretaryLocalData" : null,
+    user ? SECRETARY_LOCAL_STATE : null,
     secretaryLocalFetcher,
     {
       revalidateIfStale: false,
@@ -218,6 +219,8 @@ const SecretaryPage: NextPage = () => {
       console.log(error);
     }
   }, [user === null, localData?.videoLoading]);
+
+  console.log(localData);
 
   return (
     <>

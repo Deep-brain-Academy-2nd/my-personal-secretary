@@ -1,3 +1,5 @@
+export const SECRETARY_LOCAL_STATE = "SecretaryLocalData";
+
 // 비디오 관련 로컬상태의 타입을 정의
 export interface SecretaryStateType {
   videoLoading: boolean;

@@ -4,6 +4,9 @@ import { SecretaryStateType } from "types/secretary";
 // user 정보에 appId와 userKey가 들어있다고 가정하고 만든 token을 받아오는 fetcher
 // swr에 사용됨
 // user정보가 있을경우 조건부로 데이터를 불러와야함
+
+export const EVENT_FORM_LOCAL_STATE = "EventFormLocalState";
+
 export const secretaryFetcher = async (
   clientTokenUrl: string,
   appId: string,

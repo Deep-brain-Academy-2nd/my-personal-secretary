@@ -15,6 +15,7 @@ import { EventClickArg } from "@fullcalendar/react";
 import { DateClickArg } from "@fullcalendar/interaction";
 import { UserType } from "types/user";
 import { dbUrl } from "constant/api";
+import { EVENT_FORM_LOCAL_STATE } from "fetcher/secretary";
 
 // 기본 페이지
 
@@ -38,7 +39,7 @@ const Home: NextPage = () => {
   //  event: EventType;
   //  type: "DATE" | "EVENT";
   const { data: curState, mutate: localMutate } = useSWR(
-    "EventFormLocalState",
+    EVENT_FORM_LOCAL_STATE,
     eventLocalFetcher,
     {
       revalidateIfStale: false,
